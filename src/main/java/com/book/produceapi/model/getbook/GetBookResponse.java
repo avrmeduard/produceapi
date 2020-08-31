@@ -20,7 +20,7 @@ public class GetBookResponse {
      * List of books
      */
     @JsonProperty("book")
-    private ArrayList<Book> getBooks;
+    private ArrayList<GetBook> getBooks;
 
     /**
      * Description of the status.
@@ -34,8 +34,7 @@ public class GetBookResponse {
      * Additional properties of the book.
      *
      */
-    @JsonProperty("additionalProperties")
-    @JsonPropertyDescription(" Additional properties if they where added.")
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
@@ -44,7 +43,7 @@ public class GetBookResponse {
      * List of books
      */
     @JsonProperty("book")
-    public ArrayList<Book> getGetBooks() {
+    public ArrayList<GetBook> getGetBooks() {
         return getBooks;
     }
 
@@ -52,7 +51,7 @@ public class GetBookResponse {
      * List of books
      */
     @JsonProperty("book")
-    public void setGetBooks(ArrayList<Book> getBooks) {
+    public void setGetBooks(ArrayList<GetBook> getBooks) {
         this.getBooks = getBooks;
     }
 
@@ -81,7 +80,7 @@ public class GetBookResponse {
      * Additional properties of the book.
      *
      */
-    @JsonProperty("additionalProperties")
+    @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
     }
@@ -90,7 +89,7 @@ public class GetBookResponse {
      * Additional properties of the book.
      *
      */
-    @JsonProperty("additionalProperties")
+    @JsonAnySetter
     public void setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
     }
