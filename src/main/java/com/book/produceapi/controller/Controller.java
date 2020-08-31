@@ -1,5 +1,6 @@
 package com.book.produceapi.controller;
 
+import com.book.produceapi.model.addbook.AddBookRequest;
 import com.book.produceapi.model.addbook.AddBookResponse;
 import com.book.produceapi.model.getbook.GetBookResponse;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,6 @@ public interface Controller {
                              HttpServletResponse httpServletResponse);
 
     @PostMapping("/addBook")
-    AddBookResponse addBook(@RequestBody @Valid AddBookResponse addBookResponse,
+    AddBookResponse addBook(@RequestBody @Valid AddBookRequest addBookRequest,
                             HttpServletResponse httpServletResponse);
 }
