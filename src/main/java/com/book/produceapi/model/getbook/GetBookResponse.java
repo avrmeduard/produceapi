@@ -10,7 +10,7 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "books",
+        "book",
         "responseDescription"
 })
 
@@ -19,7 +19,7 @@ public class GetBookResponse {
     /**
      * List of books
      */
-    @JsonProperty("books")
+    @JsonProperty("book")
     private ArrayList<Book> getBooks;
 
     /**
@@ -43,7 +43,7 @@ public class GetBookResponse {
     /**
      * List of books
      */
-    @JsonProperty("books")
+    @JsonProperty("book")
     public ArrayList<Book> getGetBooks() {
         return getBooks;
     }
@@ -51,7 +51,7 @@ public class GetBookResponse {
     /**
      * List of books
      */
-    @JsonProperty("books")
+    @JsonProperty("book")
     public void setGetBooks(ArrayList<Book> getBooks) {
         this.getBooks = getBooks;
     }
