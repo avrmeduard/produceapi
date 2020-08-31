@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "id",
+        "bookId",
         "title",
         "author",
         "publisher",
@@ -25,9 +25,9 @@ public class GetBook {
      * Book id.
      *
      */
-    @JsonProperty("id")
+    @JsonProperty("bookId")
     @JsonPropertyDescription(" Book id.")
-    private Integer id;
+    private Integer bookId;
 
     /**
      * Name of the book.
@@ -90,18 +90,18 @@ public class GetBook {
      * Book id.
      *
      */
-    @JsonProperty("id")
-    public Integer getId() {
-        return id;
+    @JsonProperty("bookId")
+    public Integer getBookId() {
+        return bookId;
     }
 
     /**
      * Book id.
      *
      */
-    @JsonProperty("id")
-    public void setId(Integer id) {
-        this.id = id;
+    @JsonProperty("bookId")
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
     }
 
     /**
@@ -233,7 +233,7 @@ public class GetBook {
     @Override
     public String toString() {
         return "GetBook{" +
-                "id=" + id +
+                "bookId=" + bookId +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
