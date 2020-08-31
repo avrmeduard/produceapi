@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Book {
 
-    private Integer id;
+    private Integer bookId;
     private String title;
     private String author;
     private String publisher;
@@ -14,7 +14,7 @@ public class Book {
     private String genre;
 
     public Book(Integer id, String title, String author, String publisher, String isbn, Integer numberOfPages, String language, String genre) {
-        this.id = id;
+        this.bookId = id;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
@@ -24,12 +24,12 @@ public class Book {
         this.genre = genre;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
     }
 
     public String getTitle() {
@@ -93,7 +93,7 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(id, book.id) &&
+        return Objects.equals(bookId, book.bookId) &&
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
                 Objects.equals(publisher, book.publisher) &&
@@ -105,13 +105,13 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, publisher, isbn, numberOfPages, language, genre);
+        return Objects.hash(bookId, title, author, publisher, isbn, numberOfPages, language, genre);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "id=" + bookId +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
