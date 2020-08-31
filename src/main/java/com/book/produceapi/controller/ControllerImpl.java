@@ -1,5 +1,7 @@
 package com.book.produceapi.controller;
 
+import com.book.produceapi.model.addbook.AddBook;
+import com.book.produceapi.model.addbook.AddBookRequest;
 import com.book.produceapi.model.addbook.AddBookResponse;
 import com.book.produceapi.model.bookmodel.Book;
 import com.book.produceapi.model.getbook.GetBook;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -102,9 +105,55 @@ public class ControllerImpl implements Controller{
     }
 
     @Override
-    public AddBookResponse addBook(@Valid AddBookResponse addBookResponse,
+    public AddBookResponse addBook(AddBookRequest addBookRequest,
                                    HttpServletResponse httpServletResponse) {
-        return null;
+
+        log.info("Called /addBook");
+        AddBook addBook = addBookRequest.getBook();
+        log.debug("Called /addBook whit book " + addBook.toString());
+
+        for (Book book : bookList) {
+            if (book.getIsbn().equals(addBook.getIsbn())) {
+
+                httpServletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
+                AddBookResponse addResponse = new AddBookResponse();
+                addResponse.setResponseDescription("Book already exist");
+
+                log.info("Book already exist");
+                log.debug("Book " + addBook.toString() + " exist");
+                return addResponse;
+            }
+        }
+
+        // create new book
+        Book book = new Book();
+
+        // find book whit max id
+        Optional<Book> bookWhitMaxId = bookList.stream().min(Comparator.comparing(Book::getBookId));
+
+        // add max id + 1 to added book
+        book.setBookId(bookWhitMaxId.get().getBookId() + 1);
+        book.setTitle(addBook.getTitle());
+        book.setAuthor(addBook.getAuthor());
+        book.setPublisher(addBook.getPublisher());
+        book.setIsbn(addBook.getIsbn());
+        book.setNumberOfPages(addBook.getNumberOfPages());
+        book.setLanguage(addBook.getLanguage());
+        book.setGenre(addBook.getGenre());
+
+        bookList.add(book);
+
+        log.info("New book created");
+        log.debug("Book " + book.toString() + " created");
+
+        httpServletResponse.setStatus(HttpServletResponse.SC_CREATED);
+
+        AddBookResponse addBookResponse = new AddBookResponse();
+        addBookResponse.setBookId(bookWhitMaxId.get().getBookId() + 1);
+        addBookResponse.setResponseDescription("Book added");
+
+        return addBookResponse;
+
     }
 
 
