@@ -10,6 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -240,5 +241,24 @@ public class AddBook {
                 ", language='" + language + '\'' +
                 ", genre='" + genre + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AddBook addBook = (AddBook) o;
+        return Objects.equals(title, addBook.title) &&
+                Objects.equals(author, addBook.author) &&
+                Objects.equals(publisher, addBook.publisher) &&
+                Objects.equals(isbn, addBook.isbn) &&
+                Objects.equals(numberOfPages, addBook.numberOfPages) &&
+                Objects.equals(language, addBook.language) &&
+                Objects.equals(genre, addBook.genre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, publisher, isbn, numberOfPages, language, genre);
     }
 }
