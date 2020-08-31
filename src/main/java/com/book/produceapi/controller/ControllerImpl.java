@@ -4,6 +4,8 @@ import com.book.produceapi.model.addbook.AddBookResponse;
 import com.book.produceapi.model.bookmodel.Book;
 import com.book.produceapi.model.getbook.GetBook;
 import com.book.produceapi.model.getbook.GetBookResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 public class ControllerImpl implements Controller{
+
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     static ArrayList<Book> bookList = new ArrayList<>();
 
@@ -32,13 +36,20 @@ public class ControllerImpl implements Controller{
     public GetBookResponse getBook(Optional<Integer> bookId,
                                    HttpServletResponse httpServletResponse) {
 
-        ArrayList<GetBook> getBooks = new ArrayList<>();
+        log.info("Called /getBook");
+        log.debug("Called /getBook witch bookId = " + bookId);
 
         if (bookId.isPresent()) {
 
+            log.info("BookId is present");
+            log.debug("BookId = " + bookId.get());
+
+            ArrayList<GetBook> getBooks = new ArrayList<>();
+
             for (Book book : bookList) {
 
-                if (book.getBookId().equals(bookId)) {
+                if (book.getBookId().equals(bookId.get())) {
+
                     GetBook bookResponse = new GetBook();
                     bookResponse.setBookId(bookId.get());
                     bookResponse.setTitle(book.getTitle());
@@ -49,24 +60,45 @@ public class ControllerImpl implements Controller{
                     bookResponse.setLanguage(book.getLanguage());
                     bookResponse.setGenre(book.getGenre());
 
-                    getBooks.add(bookResponse);
-                } else {
+                    log.info("Book found and added to the list");
+                    log.debug("Book found and added: " + bookResponse.toString());
 
+                    getBooks.add(bookResponse);
                 }
             }
+            if (getBooks.isEmpty()) {
 
-        } else {
+                log.info("No book was found");
+                log.debug("No book was found whit bookId = " + bookId.get());
 
-            httpServletResponse.setStatus(400);
-            GetBookResponse getBookResponse = new GetBookResponse();
-            getBookResponse.setResponseDescription("Invalid request !");
+                httpServletResponse.setStatus(404);
+                GetBookResponse response = new GetBookResponse();
+                response.setResponseDescription("No entries found");
 
-            return getBookResponse;
+                return response;
+            } else {
+                log.info("Returning book list");
+                log.debug("Returning a number of " + getBooks.size() + " books.");
+
+                httpServletResponse.setStatus(200);
+                GetBookResponse response = new GetBookResponse();
+                response.setGetBooks(getBooks);
+                response.setResponseDescription("Result matching criteria");
+
+                return response;
+            }
+
+
 
         }
 
+        log.info("No list of books was found");
 
-        return null;
+        httpServletResponse.setStatus(400);
+        GetBookResponse getBookResponse = new GetBookResponse();
+        getBookResponse.setResponseDescription("Invalid request !");
+
+        return getBookResponse;
     }
 
     @Override
