@@ -13,6 +13,10 @@ public class Book {
     private String language;
     private String genre;
 
+    public Book() {
+
+    }
+
     public Book(Integer id, String title, String author, String publisher, String isbn, Integer numberOfPages, String language, String genre) {
         this.bookId = id;
         this.title = title;
