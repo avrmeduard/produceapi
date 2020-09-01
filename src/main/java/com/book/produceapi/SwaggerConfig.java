@@ -17,18 +17,18 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .useDefaultResponseMessages(false)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.book.produceapi"))
-                .paths(PathSelectors.any())
-                .build().apiInfo(apiEndPointInfo());
+                                           .useDefaultResponseMessages(false)
+                                           .select()
+                                           .apis(RequestHandlerSelectors.basePackage("com.book.produceapi"))
+                                           .paths(PathSelectors.any())
+                                           .build().apiInfo(apiEndPointInfo());
     }
 
     private ApiInfo apiEndPointInfo() {
         return new ApiInfoBuilder().title("Book API")
-                .description("Get/Add book from list")
-                .version("1.0.1")
-                .build();
+                                   .description("Get/Add book from list")
+                                   .version("1.0.1")
+                                   .build();
     }
 
 }
