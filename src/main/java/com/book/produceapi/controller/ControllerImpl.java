@@ -127,7 +127,7 @@ public class ControllerImpl implements Controller{
         Book book = new Book();
 
         // find book whit max id
-        Optional<Book> bookWhitMaxId = bookList.stream().min(Comparator.comparing(Book::getBookId));
+        Optional<Book> bookWhitMaxId = bookList.stream().max(Comparator.comparing(Book::getBookId));
 
         // add max id + 1 to added book
         Integer maxId = bookWhitMaxId.get().getBookId() + 1;
