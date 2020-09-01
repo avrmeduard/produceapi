@@ -45,7 +45,22 @@ public interface Controller {
 
 
 
+    @ApiOperation(value = "Add book", nickname = "addBook")
+    @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_CREATED,
+                                        message = "Book added",
+                                        response = GetBookResponse.class),
 
+                           @ApiResponse(code = HttpServletResponse.SC_CONFLICT,
+                                        message = "Book already exist",
+                                        response = GetBookResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST,
+                                        message = "Invalid request",
+                                        response = ErrorResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
+                                        message = "Method not allowed",
+                                        response = ErrorResponse.class) })
     @PostMapping("/addBook")
     AddBookResponse addBook(@RequestBody @Valid AddBookRequest addBookRequest,
                             HttpServletResponse httpServletResponse);
