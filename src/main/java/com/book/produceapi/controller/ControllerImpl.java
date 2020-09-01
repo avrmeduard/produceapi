@@ -8,6 +8,7 @@ import com.book.produceapi.model.getbook.GetBook;
 import com.book.produceapi.model.getbook.GetBookResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
+@RequestMapping("/api")
 public class ControllerImpl implements Controller{
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -154,6 +156,7 @@ public class ControllerImpl implements Controller{
         return addResponse;
 
     }
+
 
 
 }
