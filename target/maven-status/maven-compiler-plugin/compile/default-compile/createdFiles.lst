@@ -1,0 +1,12 @@
+com\book\produceapi\model\getbook\GetBook.class
+com\book\produceapi\error\ErrorSolver.class
+com\book\produceapi\model\getbook\GetBookResponse.class
+com\book\produceapi\model\addbook\AddBook.class
+com\book\produceapi\model\addbook\AddBookRequest.class
+com\book\produceapi\controller\ControllerImpl.class
+com\book\produceapi\model\bookmodel\Book.class
+com\book\produceapi\model\errormodel\ErrorResponse.class
+com\book\produceapi\controller\Controller.class
+com\book\produceapi\model\addbook\AddBookResponse.class
+com\book\produceapi\SwaggerConfig.class
+com\book\produceapi\ProduceapiApplication.class

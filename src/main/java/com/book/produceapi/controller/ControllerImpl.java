@@ -19,7 +19,6 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
-@RequestMapping("/api")
 public class ControllerImpl implements Controller{
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
