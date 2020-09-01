@@ -107,6 +107,7 @@ public class ControllerImpl implements Controller{
     @Override
     public AddBookResponse addBook(AddBookRequest addBookRequest,
                                    HttpServletResponse httpServletResponse) {
+        AddBookResponse addResponse = new AddBookResponse();
 
         log.info("Called /addBook");
         AddBook addBook = addBookRequest.getBook();
@@ -116,23 +117,22 @@ public class ControllerImpl implements Controller{
             if (book.getIsbn().equals(addBook.getIsbn())) {
 
                 httpServletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
-                AddBookResponse addResponse = new AddBookResponse();
                 addResponse.setResponseDescription("Book already exist");
 
                 log.info("Book already exist");
                 log.debug("Book " + addBook.toString() + " exist");
-                return addResponse;
             }
         }
 
-        // create new book
         Book book = new Book();
 
         // find book whit max id
         Optional<Book> bookWhitMaxId = bookList.stream().min(Comparator.comparing(Book::getBookId));
 
         // add max id + 1 to added book
-        book.setBookId(bookWhitMaxId.get().getBookId() + 1);
+        Integer maxId = bookWhitMaxId.get().getBookId() + 1;
+
+        book.setBookId(maxId);
         book.setTitle(addBook.getTitle());
         book.setAuthor(addBook.getAuthor());
         book.setPublisher(addBook.getPublisher());
@@ -148,11 +148,10 @@ public class ControllerImpl implements Controller{
 
         httpServletResponse.setStatus(HttpServletResponse.SC_CREATED);
 
-        AddBookResponse addBookResponse = new AddBookResponse();
-        addBookResponse.setBookId(bookWhitMaxId.get().getBookId() + 1);
-        addBookResponse.setResponseDescription("Book added");
+        addResponse.setBookId(book.getBookId());
+        addResponse.setResponseDescription("Book added");
 
-        return addBookResponse;
+        return addResponse;
 
     }
 
