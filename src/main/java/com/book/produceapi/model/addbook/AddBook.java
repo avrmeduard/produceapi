@@ -34,7 +34,7 @@ public class AddBook {
     @JsonPropertyDescription(" Book title.")
     @NotNull(message = "Book title cannot be null")
     @Size(min = 2, max = 34, message = "Book title should be between 2 and 34 characters, whitespace allowed")
-    @Pattern(regexp = "[A-Z][a-z]*", message = "Only letters allowed")
+    @Pattern(regexp = "[a-zA-Z ]*", message = "Only letters allowed")
     private String title;
 
     /**
@@ -45,7 +45,7 @@ public class AddBook {
     @JsonPropertyDescription(" Book author.")
     @NotNull(message = "Book author can't be null")
     @Size(min = 2, max = 34, message = "Book author should be between 2 and 34 characters, whitespace allowed")
-    @Pattern(regexp = "[A-Z][a-z]*", message = "Only letters allowed")
+    @Pattern(regexp = "[a-zA-Z ]*", message = "Only letters allowed")
     private String author;
 
     /**
@@ -56,7 +56,7 @@ public class AddBook {
     @JsonPropertyDescription(" Book publisher.")
     @NotNull(message = "Book publisher  cannot be null")
     @Size(min = 2, max = 34, message = "Book publisher should be between 2 and 34 characters, whitespace allowed")
-    @Pattern(regexp = "[A-Z][a-z]*", message = "Only letters allowed")
+    @Pattern(regexp = "[a-zA-Z ]*", message = "Only letters allowed")
     private String publisher;
 
     /**
@@ -88,7 +88,7 @@ public class AddBook {
     @JsonPropertyDescription(" Book language.")
     @NotNull(message = "Book language cannot be null")
     @Size(min = 2, max = 15, message = "Book language should be between 2 and 15 characters, whitespace allowed")
-    @Pattern(regexp = "[A-Z][a-z]*", message = "Only letters allowed")
+    @Pattern(regexp = "[a-zA-Z ]*", message = "Only letters allowed")
     private String language;
 
     /**
@@ -99,7 +99,7 @@ public class AddBook {
     @JsonPropertyDescription(" Book genre.")
     @NotNull(message = "Book genre cannot be null")
     @Size(min = 2, max = 34, message = "Book genre should be between 2 and 34 characters, whitespace allowed")
-    @Pattern(regexp = "[A-Z][a-z]*", message = "Only letters allowed")
+    @Pattern(regexp = "[a-zA-Z ]*", message = "Only letters allowed")
     private String genre;
 
 
