@@ -55,7 +55,7 @@ public class AddBook {
     @JsonProperty("publisher")
     @JsonPropertyDescription(" Book publisher.")
     @NotNull(message = "Book publisher  cannot be null")
-    @Size(min = 2, max = 34, message = "Book publisher should be between 2 and 34 characters, whitespace allowed")
+    @Size(min = 2, max = 50, message = "Book publisher should be between 2 and 34 characters, whitespace allowed")
     @Pattern(regexp = "[a-zA-Z ]*", message = "Only letters allowed")
     private String publisher;
 
@@ -66,8 +66,8 @@ public class AddBook {
     @JsonProperty("isbn")
     @JsonPropertyDescription(" Book isbn.")
     @NotNull
-    @Size(min = 12, max = 14, message = "Wrong isbn format")
-    @Pattern(regexp = "^[\\d+\\-]", message = "Only numbers allowed")
+    @Size(min = 12, max = 32, message = "Wrong isbn format")
+    @Pattern(regexp = "[0-9]+", message = "Only numbers allowed")
     private String isbn;
 
     /**
