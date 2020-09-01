@@ -78,7 +78,6 @@ public class AddBook {
     @JsonPropertyDescription(" Book number of pages.")
     @NotNull
     @Min(value = 10, message = "The number of pages is to low.")
-    @Pattern(regexp = "[0-9]")
     private Integer numberOfPages;
 
     /**
