@@ -21,17 +21,22 @@ import java.util.concurrent.ConcurrentHashMap;
 @RestController
 public class ControllerImpl implements Controller{
 
+
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     static ArrayList<Book> bookList = new ArrayList<>();
-
     static {
-        bookList.add(new Book(1, "Starsight", "Brandon Sanderson", "Random House Children's Books",
-                "9780593123829", 480, "Engleza", "Young Adult"));
-        bookList.add(new Book(2, "Carry On", "Rainbow Rowell", "Pan Macmillan",
-                "9781529013009", 528, "Engleza", "Moderni"));
-        bookList.add(new Book(3, "Lost Art Of Closing", "Anthony Iannarino", "Penguin Putnam Inc",
-                "9780735211698", 240, "Engleza", "Carte straina"));
+               bookList.add(new Book(1, "Starsight", "Brandon Sanderson",
+                       "Random House Children's Books", "9780593123829", 480,
+                       "Engleza", "Young Adult"));
+
+               bookList.add(new Book(2, "Carry On", "Rainbow Rowell",
+                       "Pan Macmillan", "9781529013009", 528,
+                       "Engleza", "Moderni"));
+
+               bookList.add(new Book(3, "Lost Art Of Closing", "Anthony Iannarino",
+                       "Penguin Putnam Inc", "9780735211698", 240,
+                       "Engleza", "Carte straina"));
     }
 
 
@@ -150,10 +155,9 @@ public class ControllerImpl implements Controller{
         httpServletResponse.setStatus(HttpServletResponse.SC_CREATED);
 
         addResponse.setBookId(book.getBookId());
-        addResponse.setResponseDescription("Book added");
+        addResponse.setResponseDescription("Book " + book.getTitle() + " by " + book.getTitle() +  " added.");
 
         return addResponse;
-
     }
 
 
