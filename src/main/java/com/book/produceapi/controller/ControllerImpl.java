@@ -49,7 +49,6 @@ public class ControllerImpl implements Controller{
         log.debug("Called /getBook witch bookId = " + bookId);
 
         if (bookId.isPresent()) {
-
             log.info("BookId is present");
             log.debug("BookId = " + bookId.get());
 
@@ -75,16 +74,17 @@ public class ControllerImpl implements Controller{
                     getBooks.add(bookResponse);
                 }
             }
-            if (getBooks.isEmpty()) {
 
+            if (getBooks.isEmpty()) {
                 log.info("No book was found");
                 log.debug("No book was found whit bookId = " + bookId.get());
 
                 httpServletResponse.setStatus(404);
                 GetBookResponse response = new GetBookResponse();
-                response.setResponseDescription("No entries found");
+                response.setResponseDescription("Book whit id " + bookId.get() + " does not exist.");
 
                 return response;
+
             } else {
                 log.info("Returning book list");
                 log.debug("Returning a number of " + getBooks.size() + " books.");
@@ -96,16 +96,13 @@ public class ControllerImpl implements Controller{
 
                 return response;
             }
-
-
-
         }
 
         log.info("No list of books was found");
 
         httpServletResponse.setStatus(400);
         GetBookResponse getBookResponse = new GetBookResponse();
-        getBookResponse.setResponseDescription("Invalid request !");
+        getBookResponse.setResponseDescription("Please type a number !");
 
         return getBookResponse;
     }
@@ -159,7 +156,5 @@ public class ControllerImpl implements Controller{
 
         return addResponse;
     }
-
-
 
 }
