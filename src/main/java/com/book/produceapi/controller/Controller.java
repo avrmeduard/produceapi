@@ -70,7 +70,7 @@ public interface Controller {
                                         response = ErrorResponse.class) })
     @GetMapping("/getBook/")
     GetBookResponse getBook(@RequestParam Optional<Integer> bookId,
-                             HttpServletResponse httpServletResponse);
+                                          HttpServletResponse httpServletResponse);
 
 
 
@@ -98,7 +98,7 @@ public interface Controller {
                                         response = ErrorResponse.class) })
     @PostMapping("/addBook")
     AddBookResponse addBook(@RequestBody @Valid AddBookRequest addBookRequest,
-                            HttpServletResponse httpServletResponse);
+                                                HttpServletResponse httpServletResponse);
 
 
 
@@ -126,7 +126,7 @@ public interface Controller {
                                         response = ErrorResponse.class) })
     @PostMapping("/updateBook")
     ResponseEntity<UpdateBookResponse> updateBook(@RequestBody @Valid UpdateBookRequest updateBookRequest,
-                              HttpServletResponse httpServletResponse);
+                                                                      HttpServletResponse httpServletResponse);
 
 
 
@@ -175,5 +175,5 @@ public interface Controller {
                                         response = ErrorResponse.class) })
     @GetMapping("/deleteBook/")
     GetBookResponse deleteBook(@RequestParam Optional<Integer> bookId,
-                               HttpServletResponse httpServletResponse);
+                                             HttpServletResponse httpServletResponse);
 }
