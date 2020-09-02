@@ -148,4 +148,31 @@ public interface Controller {
                                         response = ErrorResponse.class) })
     @GetMapping("/deleteBook")
     GetBookResponse deleteBook(HttpServletResponse httpServletResponse);
+
+
+
+    /**
+     *
+     * Delete book by id
+     *
+     */
+    @ApiOperation(value = "Delete book", nickname = "deleteBook")
+    @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK,
+                                        message = "Result matching criteria",
+                                        response = GetBookResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND,
+                                        message = "No entry found",
+                                        response = GetBookResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST,
+                                        message = "Invalid request",
+                                        response = GetBookResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
+                                        message = "Method not allowed",
+                                        response = ErrorResponse.class) })
+    @GetMapping("/deleteBook/")
+    GetBookResponse deleteBook(@RequestParam Optional<Integer> bookId,
+                               HttpServletResponse httpServletResponse);
 }
