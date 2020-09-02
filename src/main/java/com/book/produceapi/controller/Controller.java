@@ -4,6 +4,8 @@ import com.book.produceapi.model.addbook.AddBookRequest;
 import com.book.produceapi.model.addbook.AddBookResponse;
 import com.book.produceapi.model.errormodel.ErrorResponse;
 import com.book.produceapi.model.getbook.GetBookResponse;
+import com.book.produceapi.model.updatebook.UpdateBookRequest;
+import com.book.produceapi.model.updatebook.UpdateBookResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -22,27 +24,33 @@ import java.util.Optional;
 public interface Controller {
 
 
+    /**
+     *
+     * Get all books
+     *
+     */
     @ApiOperation(value = "Get all book", nickname = "getAllBook")
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK,
-            message = "Result matching criteria",
-            response = GetBookResponse.class),
+                                        message = "Result matching criteria",
+                                        response = GetBookResponse.class),
 
-            @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND,
-                    message = "No entry found",
-                    response = GetBookResponse.class),
+                           @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND,
+                                        message = "No entry found",
+                                        response = GetBookResponse.class),
 
-            @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST,
-                    message = "Invalid request",
-                    response = GetBookResponse.class),
-
-            @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
-                    message = "Method not allowed",
-                    response = ErrorResponse.class) })
+                           @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
+                                        message = "Method not allowed",
+                                        response = ErrorResponse.class) })
     @GetMapping("/getBook")
     GetBookResponse getBook(HttpServletResponse httpServletResponse);
 
 
 
+    /**
+     *
+     * Get book by id
+     *
+     */
     @ApiOperation(value = "Get book", nickname = "getBook")
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK,
                                         message = "Result matching criteria",
@@ -66,6 +74,11 @@ public interface Controller {
 
 
 
+    /**
+     *
+     * Add book by a book model
+     *
+     */
     @ApiOperation(value = "Add book", nickname = "addBook")
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_CREATED,
                                         message = "Book added",
@@ -85,4 +98,9 @@ public interface Controller {
     @PostMapping("/addBook")
     AddBookResponse addBook(@RequestBody @Valid AddBookRequest addBookRequest,
                             HttpServletResponse httpServletResponse);
+
+
+
+
+
 }
