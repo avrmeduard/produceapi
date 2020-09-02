@@ -144,7 +144,7 @@ public interface Controller {
                            @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
                                         message = "Method not allowed",
                                         response = ErrorResponse.class) })
-    @GetMapping("/deleteBook")
+    @DeleteMapping("/deleteBook")
     GetBookResponse deleteBook(HttpServletResponse httpServletResponse);
 
 
@@ -170,7 +170,7 @@ public interface Controller {
                            @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
                                         message = "Method not allowed",
                                         response = ErrorResponse.class) })
-    @GetMapping("/deleteBook/")
+    @DeleteMapping("/deleteBook/")
     GetBookResponse deleteBook(@RequestParam Optional<Integer> bookId,
                                              HttpServletResponse httpServletResponse);
 }
