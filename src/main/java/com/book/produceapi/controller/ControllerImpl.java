@@ -4,6 +4,7 @@ import com.book.produceapi.model.addbook.AddBook;
 import com.book.produceapi.model.addbook.AddBookRequest;
 import com.book.produceapi.model.addbook.AddBookResponse;
 import com.book.produceapi.model.bookmodel.Book;
+import com.book.produceapi.model.deletebook.DeleteBookResponse;
 import com.book.produceapi.model.getbook.GetBook;
 import com.book.produceapi.model.getbook.GetBookResponse;
 import com.book.produceapi.model.updatebook.UpdateBook;
@@ -264,12 +265,40 @@ public class ControllerImpl implements Controller{
     }
 
     @Override
-    public GetBookResponse deleteBook(HttpServletResponse httpServletResponse) {
-        return null;
+    public DeleteBookResponse deleteBook(HttpServletResponse httpServletResponse) {
+
+
+        log.info("Called /deleteBooks");
+        log.debug("Called /deleteBooks whit a list of " + bookList.size() + " books.");
+
+        DeleteBookResponse response = new DeleteBookResponse();
+
+        if (bookList.isEmpty()) {
+
+            log.info("Empty book list");
+            log.debug("No books found in booklist. " + bookList.size() + " books found.");
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setResponseDescription("Book list it is already empty.");
+
+        }
+
+        log.info("Book list whit " + bookList.size()  + " books successful called");
+        log.debug(bookList.size() + " books found.");
+
+        bookList.clear();
+
+        log.info("Book list cleared and has " + bookList.size()  + " books.");
+        log.debug(bookList.size() + " books found.");
+
+        httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        response.setResponseDescription("All books deleted");
+
+        return response;
     }
 
     @Override
-    public GetBookResponse deleteBook(Optional<Integer> bookId,
+    public DeleteBookResponse deleteBook(Optional<Integer> bookId,
                                       HttpServletResponse httpServletResponse) {
         return null;
     }
