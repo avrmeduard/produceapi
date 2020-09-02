@@ -6,11 +6,13 @@ import com.book.produceapi.model.addbook.AddBookResponse;
 import com.book.produceapi.model.bookmodel.Book;
 import com.book.produceapi.model.getbook.GetBook;
 import com.book.produceapi.model.getbook.GetBookResponse;
+import com.book.produceapi.model.updatebook.UpdateBook;
 import com.book.produceapi.model.updatebook.UpdateBookRequest;
 import com.book.produceapi.model.updatebook.UpdateBookResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -214,9 +216,51 @@ public class ControllerImpl implements Controller{
     }
 
     @Override
-    public UpdateBookResponse updateBook(UpdateBookRequest updateBookRequest,
-                                         HttpServletResponse httpServletResponse) {
-        return null;
+    public ResponseEntity<UpdateBookResponse> updateBook(UpdateBookRequest updateBookRequest,
+                                                         HttpServletResponse httpServletResponse) {
+
+
+        log.info("Called /updateBook");
+        UpdateBookResponse response = new UpdateBookResponse();
+        UpdateBook updateBook = updateBookRequest.getBook();
+        log.debug("Called /updateBook whit book " + updateBook.toString());
+
+        for (Book book : bookList) {
+
+            if ( book.getBookId().equals(updateBook.getBookId()) ) {
+
+                System.out.println(book.getBookId());
+
+                if ( book.getIsbn().equals(updateBook.getIsbn()) ) {
+                    response.setResponseDescription("The ISBN book requested whit id " +
+                                                              updateBook.getBookId() + " it's identical");
+
+                    log.info("Book fields does not match");
+                    log.debug("Book " + updateBook.toString() + " has same ISBN");
+
+                    return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+
+                } else {
+
+                    book.setTitle(updateBook.getTitle());
+                    book.setAuthor(updateBook.getAuthor());
+                    book.setPublisher(updateBook.getPublisher());
+                    book.setIsbn(updateBook.getIsbn());
+                    book.setNumberOfPages(updateBook.getNumberOfPages());
+                    book.setLanguage(updateBook.getLanguage());
+                    book.setGenre(updateBook.getGenre());
+
+                    log.info("Book " + updateBook.getTitle() + " successful updated");
+                    log.debug("Book " + book.getBookId() + " updated");
+
+                    response.setResponseDescription("Item updated");
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                }
+            }
+        }
+
+        response.setResponseDescription("Book whit id " + updateBook.getBookId() + " not found");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @Override
