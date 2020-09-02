@@ -8,6 +8,7 @@ import com.book.produceapi.model.getbook.GetBook;
 import com.book.produceapi.model.getbook.GetBookResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,16 +28,69 @@ public class ControllerImpl implements Controller{
     static ArrayList<Book> bookList = new ArrayList<>();
     static {
                bookList.add(new Book(1, "Starsight", "Brandon Sanderson",
-                       "Random House Children's Books", "9780593123829", 480,
-                       "Engleza", "Young Adult"));
+                                     "Random House Children's Books", "9780593123829", 480,
+                                     "Engleza", "Young Adult"));
 
-               bookList.add(new Book(2, "Carry On", "Rainbow Rowell",
-                       "Pan Macmillan", "9781529013009", 528,
-                       "Engleza", "Moderni"));
+               bookList.add(new Book(1, "Carry On", "Rainbow Rowell",
+                                     "Pan Macmillan", "9781529013009", 528,
+                                     "Engleza", "Moderni"));
 
                bookList.add(new Book(3, "Lost Art Of Closing", "Anthony Iannarino",
-                       "Penguin Putnam Inc", "9780735211698", 240,
-                       "Engleza", "Carte straina"));
+                                     "Penguin Putnam Inc", "9780735211698", 240,
+                                     "Engleza", "Carte straina"));
+    }
+
+
+    @Override
+    public GetBookResponse getBook(HttpServletResponse httpServletResponse) {
+
+        log.info("Called /getBook");
+        log.debug("Called /getBook witch contains " + bookList.size() + " books.");
+
+        GetBookResponse getBookResponse = new GetBookResponse();
+        ArrayList<GetBook> getBooks = new ArrayList<>();
+
+
+
+        if (!bookList.isEmpty()) {
+
+            for (Book book : bookList) {
+
+                GetBook bookResponse = new GetBook();
+
+                bookResponse.setBookId(book.getBookId());
+                bookResponse.setTitle(book.getTitle());
+                bookResponse.setAuthor(book.getAuthor());
+                bookResponse.setPublisher(book.getPublisher());
+                bookResponse.setIsbn(book.getIsbn());
+                bookResponse.setNumberOfPages(book.getNumberOfPages());
+                bookResponse.setLanguage(book.getLanguage());
+                bookResponse.setGenre(book.getGenre());
+
+                log.info("Book " + book.getTitle() + " added to the list");
+                log.debug("Books found and added: " + bookResponse.toString());
+
+                getBooks.add(bookResponse);
+            }
+
+            log.info("Returning book list");
+            log.debug("Returning a number of " + getBooks.size() + " books.");
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            getBookResponse.setGetBooks(getBooks);
+            getBookResponse.setResponseDescription("All books available");
+
+            return getBookResponse;
+
+        }
+
+        log.info("No books found");
+        log.debug("No books found. Book list has " + bookList.size() + " books.");
+
+        httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        getBookResponse.setResponseDescription("No books available");
+
+        return getBookResponse;
     }
 
 
@@ -45,7 +99,7 @@ public class ControllerImpl implements Controller{
     public GetBookResponse getBook(Optional<Integer> bookId,
                                    HttpServletResponse httpServletResponse) {
 
-        log.info("Called /getBook");
+        log.info("Called /getBook/{id}");
         log.debug("Called /getBook witch bookId = " + bookId);
 
         if (bookId.isPresent()) {

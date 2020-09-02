@@ -22,6 +22,27 @@ import java.util.Optional;
 public interface Controller {
 
 
+    @ApiOperation(value = "Get all book", nickname = "getAllBook")
+    @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK,
+            message = "Result matching criteria",
+            response = GetBookResponse.class),
+
+            @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND,
+                    message = "No entry found",
+                    response = GetBookResponse.class),
+
+            @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST,
+                    message = "Invalid request",
+                    response = GetBookResponse.class),
+
+            @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
+                    message = "Method not allowed",
+                    response = ErrorResponse.class) })
+    @GetMapping("/getBook")
+    GetBookResponse getBook(HttpServletResponse httpServletResponse);
+
+
+
     @ApiOperation(value = "Get book", nickname = "getBook")
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK,
                                         message = "Result matching criteria",
@@ -38,7 +59,7 @@ public interface Controller {
                            @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
                                         message = "Method not allowed",
                                         response = ErrorResponse.class) })
-    @GetMapping("/getBook")
+    @GetMapping("/getBook/")
     GetBookResponse getBook(@RequestParam Optional<Integer> bookId,
                              HttpServletResponse httpServletResponse);
 
