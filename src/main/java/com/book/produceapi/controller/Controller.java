@@ -2,6 +2,7 @@ package com.book.produceapi.controller;
 
 import com.book.produceapi.model.addbook.AddBookRequest;
 import com.book.produceapi.model.addbook.AddBookResponse;
+import com.book.produceapi.model.deletebook.DeleteBookResponse;
 import com.book.produceapi.model.errormodel.ErrorResponse;
 import com.book.produceapi.model.getbook.GetBookResponse;
 import com.book.produceapi.model.updatebook.UpdateBookRequest;
@@ -145,7 +146,7 @@ public interface Controller {
                                         message = "Method not allowed",
                                         response = ErrorResponse.class) })
     @DeleteMapping("/deleteBook")
-    GetBookResponse deleteBook(HttpServletResponse httpServletResponse);
+    DeleteBookResponse deleteBook(HttpServletResponse httpServletResponse);
 
 
 
@@ -171,6 +172,6 @@ public interface Controller {
                                         message = "Method not allowed",
                                         response = ErrorResponse.class) })
     @DeleteMapping("/deleteBook/")
-    GetBookResponse deleteBook(@RequestParam Optional<Integer> bookId,
-                                             HttpServletResponse httpServletResponse);
+    DeleteBookResponse deleteBook(@RequestParam Optional<Integer> bookId,
+                                  HttpServletResponse httpServletResponse);
 }
