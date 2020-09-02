@@ -102,5 +102,28 @@ public interface Controller {
 
 
 
+    /**
+     *
+     * Update book by a book model
+     *
+     */
+    @ApiOperation(value = "Update book", nickname = "updateBook")
+    @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_CREATED,
+                                        message = "Book added",
+                                        response = GetBookResponse.class),
 
+                           @ApiResponse(code = HttpServletResponse.SC_CONFLICT,
+                                        message = "Book already exist",
+                                        response = GetBookResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST,
+                                        message = "Invalid request",
+                                        response = ErrorResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
+                                        message = "Method not allowed",
+                                        response = ErrorResponse.class) })
+    @PostMapping("/updateBook")
+    UpdateBookResponse updateBook(@RequestBody @Valid UpdateBookRequest updateBookRequest,
+                                  HttpServletResponse httpServletResponse);
 }
