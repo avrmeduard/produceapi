@@ -6,6 +6,8 @@ import com.book.produceapi.model.addbook.AddBookResponse;
 import com.book.produceapi.model.bookmodel.Book;
 import com.book.produceapi.model.getbook.GetBook;
 import com.book.produceapi.model.getbook.GetBookResponse;
+import com.book.produceapi.model.updatebook.UpdateBookRequest;
+import com.book.produceapi.model.updatebook.UpdateBookResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -211,4 +213,20 @@ public class ControllerImpl implements Controller{
         return addResponse;
     }
 
+    @Override
+    public UpdateBookResponse updateBook(UpdateBookRequest updateBookRequest,
+                                         HttpServletResponse httpServletResponse) {
+        return null;
+    }
+
+    @Override
+    public GetBookResponse deleteBook(HttpServletResponse httpServletResponse) {
+        return null;
+    }
+
+    @Override
+    public GetBookResponse deleteBook(Optional<Integer> bookId,
+                                      HttpServletResponse httpServletResponse) {
+        return null;
+    }
 }
