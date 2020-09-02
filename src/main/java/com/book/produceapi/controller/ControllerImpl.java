@@ -299,7 +299,44 @@ public class ControllerImpl implements Controller{
 
     @Override
     public DeleteBookResponse deleteBook(Optional<Integer> bookId,
-                                      HttpServletResponse httpServletResponse) {
-        return null;
+                                         HttpServletResponse httpServletResponse) {
+
+        log.info("Called /deleteBook/{id}");
+
+        DeleteBookResponse response = new DeleteBookResponse();
+
+        if (bookId.isPresent()) {
+
+            log.info("Called /deleteBook with bookId = " + bookId.get());
+            log.debug("Called /deleteBook with bookId = " + bookId.get());
+
+            for (Book book : bookList) {
+                if (book.getBookId().equals(bookId.get())) {
+
+                    log.info("Book with id = " + bookId.get() + " was found.");
+                    log.debug("Book with id = " + bookId.get() + " was found.");
+
+                    bookList.remove(book);
+
+                    log.info("Book with id = " + bookId.get() + " was delete.");
+                    log.debug("Book with id = " + bookId.get() + " was delete.\n" +
+                              "Book list size is " + bookList.size());
+
+                    httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                    response.setResponseDescription("Book whit id " + bookId.get() + " successful delete.");
+
+                    return response;
+                }
+            }
+
+        }
+
+        log.info("No book was found");
+        log.debug("Invalid request, no parameter found");
+
+        httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        response.setResponseDescription("Please type a valid bookId.");
+
+        return response;
     }
 }
