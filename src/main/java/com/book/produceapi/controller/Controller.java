@@ -126,4 +126,26 @@ public interface Controller {
     @PostMapping("/updateBook")
     UpdateBookResponse updateBook(@RequestBody @Valid UpdateBookRequest updateBookRequest,
                                   HttpServletResponse httpServletResponse);
+
+
+
+    /**
+     *
+     * Delete all books
+     *
+     */
+    @ApiOperation(value = "Delete all book", nickname = "deleteAllBook")
+    @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK,
+                                        message = "All books has been deleted",
+                                        response = GetBookResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND,
+                                        message = "No books found",
+                                        response = GetBookResponse.class),
+
+                           @ApiResponse(code = HttpServletResponse.SC_METHOD_NOT_ALLOWED,
+                                        message = "Method not allowed",
+                                        response = ErrorResponse.class) })
+    @GetMapping("/deleteBook")
+    GetBookResponse deleteBook(HttpServletResponse httpServletResponse);
 }
