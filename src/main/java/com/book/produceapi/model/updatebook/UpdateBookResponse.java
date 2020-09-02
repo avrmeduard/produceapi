@@ -13,18 +13,10 @@ import java.util.Map;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "bookId",
         "responseDescription"
 })
 public class UpdateBookResponse {
 
-    /**
-     * The book id that has been created.
-     *
-     */
-    @JsonProperty("bookId")
-    @JsonPropertyDescription(" The id of the new created customer.")
-    private Integer bookId;
     /**
      * Description of the status.
      *
@@ -32,26 +24,9 @@ public class UpdateBookResponse {
     @JsonProperty("responseDescription")
     @JsonPropertyDescription(" Description of the status.")
     private String responseDescription;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    /**
-     * The id of the new created customer.
-     *
-     */
-    @JsonProperty("bookId")
-    public Integer getBookId() {
-        return bookId;
-    }
-
-    /**
-     * The id of the new created customer.
-     *
-     */
-    @JsonProperty("bookId")
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
 
     /**
      * Description of the status.
